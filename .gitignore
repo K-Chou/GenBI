@@ -1,0 +1,8 @@
+node_modules
+.next
+out
+uploads/*
+artifacts/*
+.env*
+!.env.example
+tsconfig.tsbuildinfo

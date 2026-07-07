@@ -1,0 +1,122 @@
+---
+description: AI Dashboard Platform Product Rules
+alwaysApply: true
+---
+
+# Product Identity
+
+This project is an AI Native Dashboard Agent Platform.
+
+It is NOT a traditional BI system.
+
+The product principle:
+
+Everything is generated.
+Everything is an Artifact.
+
+
+# Core Workflow
+
+All dashboard generation must follow:
+
+User Intent
+
+↓
+
+Intent Understanding
+
+↓
+
+Dataset Understanding
+
+↓
+
+Dashboard Planning
+
+↓
+
+Design Application
+
+↓
+
+Artifact Generation
+
+↓
+
+Quality Review
+
+
+Never directly:
+
+User Request → LLM → HTML
+
+
+# Architecture Rules
+
+Frontend only handles:
+
+- User interaction
+- File upload
+- Chat UI
+- Preview
+
+
+Business logic must live in:
+
+agents/
+
+services/
+
+skills/
+
+prompts/
+
+
+Do not put AI workflow logic inside React components.
+
+
+# Forbidden Product Direction
+
+Do NOT implement:
+
+- Drag and drop dashboard builder
+- Widget editor
+- Chart configuration UI
+- Dashboard designer
+- SQL builder
+- Traditional BI modeling
+
+
+# Deployment Principle
+
+The product must run independently after deployment.
+
+Cursor is only a development tool.
+
+Do not rely on Cursor runtime.
+
+
+# AI Rules
+
+LLM calls must happen in backend.
+
+Never expose API keys to frontend.
+
+Use service abstraction for model providers.
+
+
+# Dashboard Rules
+
+Generated dashboards must follow:
+
+- Apple inspired style
+- Minimal
+- Professional
+- Responsive
+- Mobile first
+- KPI first
+- 24px spacing
+- 16px cards
+- Maximum 5 colors
+- No gradient background
+- No 3D charts
