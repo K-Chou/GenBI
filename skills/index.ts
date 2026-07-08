@@ -9,11 +9,14 @@ import { analyticalDashboardSkill } from "@/skills/analytical-dashboard";
 import { commonDashboardSkill } from "@/skills/common-dashboard";
 import { executiveOverviewSkill } from "@/skills/executive-overview";
 import { financeDashboardSkill } from "@/skills/finance";
+import { internalDashboardPatterns } from "@/skills/internal-dashboard-patterns";
 import { operationalMonitoringSkill } from "@/skills/operational-monitoring";
 import { salesDashboardSkill } from "@/skills/sales";
 import { saasDashboardSkill } from "@/skills/saas";
+import { serviceProductOperationsSkill } from "@/skills/service-product-operations";
 
 const skills = [
+  serviceProductOperationsSkill,
   salesDashboardSkill,
   financeDashboardSkill,
   saasDashboardSkill,
@@ -80,31 +83,37 @@ export function createEffectiveSkill(params: {
     preferenceMemory: params.preferenceMemory,
     optimizations: params.optimizations,
     businessRules: [
+      ...internalDashboardPatterns.businessRules,
       ...params.baseSkill.businessRules,
       ...preferenceRules.businessRules,
       ...(params.optimizations?.businessRules ?? []),
     ],
     kpiRules: [
+      ...internalDashboardPatterns.kpiRules,
       ...params.baseSkill.kpiRules,
       ...preferenceRules.kpiRules,
       ...(params.optimizations?.kpiRules ?? []),
     ],
     chartRules: [
+      ...internalDashboardPatterns.chartRules,
       ...params.baseSkill.chartRules,
       ...preferenceRules.chartRules,
       ...(params.optimizations?.chartRules ?? []),
     ],
     layoutRules: [
+      ...internalDashboardPatterns.layoutRules,
       ...params.baseSkill.layoutRules,
       ...preferenceRules.layoutRules,
       ...(params.optimizations?.layoutRules ?? []),
     ],
     designRules: [
+      ...internalDashboardPatterns.designRules,
       ...params.baseSkill.designRules,
       ...preferenceRules.designRules,
       ...(params.optimizations?.designRules ?? []),
     ],
     promptExtension: [
+      internalDashboardPatterns.promptExtension,
       params.baseSkill.promptExtension,
       ...(params.optimizations?.rationale ?? []).map((item) => `优化原因：${item}`),
     ].join("\n"),
@@ -119,4 +128,5 @@ export {
   operationalMonitoringSkill,
   salesDashboardSkill,
   saasDashboardSkill,
+  serviceProductOperationsSkill,
 };

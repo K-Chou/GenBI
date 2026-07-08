@@ -18,11 +18,14 @@ export async function POST(request: Request) {
 
   const result = await runDashboardWorkflow({
     dataset,
+    userId: body.userId,
     userRequest: body.userRequest,
     theme: body.theme,
     promptSettings: body.promptSettings,
     history: body.history,
     images: body.images,
+    plan: body.plan,
+    resumeWorkflow: body.resumeWorkflow,
   });
 
   return NextResponse.json(result);

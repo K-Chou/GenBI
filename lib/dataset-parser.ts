@@ -132,8 +132,14 @@ export async function parseDatasetFile(file: File): Promise<DatasetMetadata> {
     fileName: file.name,
     sheetName,
     uploadedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     rowCount: normalizedRows.length,
     columns: buildColumns(normalizedRows, columnNames),
+    source: {
+      originalFileName: file.name,
+      type: "upload",
+    },
+    rows: normalizedRows,
     sampleRows: normalizedRows.slice(0, SAMPLE_ROW_LIMIT),
   };
 }

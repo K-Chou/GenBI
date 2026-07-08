@@ -12,7 +12,7 @@ export function DatasetPreview({ dataset }: { dataset: DatasetMetadata | null })
   if (!dataset) {
     return (
       <div className="apple-card p-6">
-        <p className="text-sm text-muted">上传 Excel 或 CSV 文件后，这里会展示 metadata。</p>
+        <p className="text-sm text-muted">上传 Excel 或 CSV 文件后，这里会展示底表数据 metadata。</p>
       </div>
     );
   }
@@ -30,8 +30,10 @@ export function DatasetPreview({ dataset }: { dataset: DatasetMetadata | null })
         {dataset.columns.map((column) => (
           <div key={column.name} className="rounded-2xl border border-black/5 bg-white/40 p-4">
             <div className="flex items-center justify-between gap-3">
-              <p className="font-medium">{column.name}</p>
-              <span className="rounded-full bg-black/5 px-2 py-1 text-xs text-muted">
+              <p className="min-w-0 truncate font-medium" title={column.name}>
+                {column.name}
+              </p>
+              <span className="shrink-0 whitespace-nowrap rounded-full bg-black/5 px-2 py-1 text-xs text-muted">
                 {typeLabels[column.type] ?? column.type}
               </span>
             </div>

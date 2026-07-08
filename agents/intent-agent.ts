@@ -1,43 +1,29 @@
-import type { ChatMessage, ImageAttachment, IntentUnderstanding } from "@/lib/types";
-import { completeJson, type LlmMessage } from "@/services/deepseek";
+import type { ChatMessage, IntentUnderstanding, ReferenceImageAnalysis } from "@/lib/types";
+import { completeJson } from "@/services/deepseek";
 
 function buildUserContent(params: {
   userRequest: string;
   history?: ChatMessage[];
-  images?: ImageAttachment[];
-}): LlmMessage["content"] {
-  const text = JSON.stringify(
+  imageAnalysis?: ReferenceImageAnalysis;
+}) {
+  return JSON.stringify(
     {
       userRequest: params.userRequest,
       conversationHistory: (params.history ?? []).slice(-6),
-      referenceImages:
-        params.images && params.images.length > 0
-          ? "用户上传了参考图片，请结合图片判断用户想要的 Dashboard 类型、受众和业务目标。"
-          : "无参考图片。",
+      referenceImageAnalysis: params.imageAnalysis,
     },
     null,
     2,
   );
-
-  if (!params.images?.length) {
-    return text;
-  }
-
-  return [
-    { type: "text", text },
-    ...params.images.map((image) => ({
-      type: "image_url" as const,
-      image_url: { url: image.dataUrl },
-    })),
-  ];
 }
 
 export async function runIntentAgent(params: {
   userRequest: string;
   history?: ChatMessage[];
-  images?: ImageAttachment[];
+  imageAnalysis?: ReferenceImageAnalysis;
 }): Promise<IntentUnderstanding> {
   return completeJson<IntentUnderstanding>({
+    stage: "intent",
     temperature: 0.1,
     messages: [
       {

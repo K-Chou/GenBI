@@ -3,6 +3,8 @@ node_modules
 out
 uploads/*
 artifacts/*
+preferences/*
+settings/*
 .env*
 !.env.example
 tsconfig.tsbuildinfo

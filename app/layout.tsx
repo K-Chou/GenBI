@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ApiConsoleLogger } from "@/components/ApiConsoleLogger";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "AI Dashboard 平台",
-  description: "上传数据，用 Chat 生成 Dashboard Artifact。",
+  description: "上传底表数据，用 Chat 生成仪表盘。",
 };
 
 export default function RootLayout({
@@ -19,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        <ApiConsoleLogger />
+        {children}
+      </body>
     </html>
   );
 }

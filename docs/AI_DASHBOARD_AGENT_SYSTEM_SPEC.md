@@ -497,7 +497,7 @@ Forbidden:
 Purpose:
 
 
-Generate Dashboard Artifact.
+Generate validated DashboardDocument JSON Artifact.
 
 
 Input:
@@ -529,7 +529,7 @@ Output:
 
 
 ```
-index.html
+dashboard.json
 
 metadata.json
 
@@ -544,6 +544,44 @@ review.json
 ```
 
 
+Builder Agent does not generate final HTML directly. It generates the structured source artifact used for validation, repair, recalculation, and conversational patching.
+
+
+---
+
+# 7.1 HTML Presentation Agent
+
+
+Purpose:
+
+
+Convert a validated DashboardDocument into the final presentation artifact.
+
+
+Input:
+
+
+```
+DashboardDocument
+
++
+
+Design Specification
+
++
+
+Precomputed view rows
+```
+
+
+Output:
+
+
+```
+index.html
+```
+
+
 HTML requirements:
 
 
@@ -553,6 +591,8 @@ HTML requirements:
 - Responsive
 - Dark mode support
 - iframe compatible
+- No runtime fetch/XMLHttpRequest/WebSocket
+- Use only inline presentation data derived from DashboardDocument views
 
 
 ---
@@ -633,6 +673,8 @@ datasetId/
 
 v1/
 
+dashboard.json
+
 index.html
 
 metadata.json
@@ -640,6 +682,10 @@ metadata.json
 manifest.json
 
 blueprint.json
+
+metric-system.json
+
+design-spec.json
 
 workflow.json
 
@@ -653,7 +699,7 @@ v2/
 ```
 
 
-Every modification creates a new version.
+Major regeneration creates a new version. Conversational patching updates the existing bundle by patching dashboard.json and refreshing index.html.
 
 
 Example:
